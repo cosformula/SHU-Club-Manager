@@ -1,0 +1,13 @@
+ {% block body %}
+{% if current_user.is_authenticated %}
+  Hi {{ current_user.name }}!
+{% endif %}
+{% if not current_user.is_authenticated %}
+
+<form action='/login' method='POST'>
+<input type='text' name='card_id' id='email' placeholder='email'></input>
+<input type='password' name='password' id='pw' placeholder='password'></input>
+<input type='submit' name='submit'></input>
+</form>
+{% endif %}
+{% endblock %}
