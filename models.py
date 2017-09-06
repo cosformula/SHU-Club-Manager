@@ -28,8 +28,8 @@ class User(flask_login.UserMixin, Document):
     phone = StringField()
     role = StringField()
     create_time = DateTimeField(default=datetime.datetime.now)
-    clubs = ListField(ReferenceField(Club))
-    meta = {
+    clubs = ListField(ReferenceField(Club),default=[])
+    meta= {
         'strict': False
     }
 
