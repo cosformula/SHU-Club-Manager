@@ -100,7 +100,7 @@ def reg_osc():
             abort(401)
         return jsonify(status='ok')
     else:
-        return jsonify(status='get')
+        return render_template('reg.html')
 
                 
 
