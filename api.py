@@ -104,6 +104,8 @@ def reg_osc():
     else:
         return render_template('reg.html')
 
+# miao
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_view():
