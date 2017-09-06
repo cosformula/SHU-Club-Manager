@@ -77,7 +77,7 @@ def validate(card_id, password):
 def index():
     return redirect('/admin')
 
-#
+##
 
 @app.route('/reg/osc', methods=['GET', 'POST'])
 def reg_osc():
