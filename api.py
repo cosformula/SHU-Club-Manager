@@ -81,12 +81,13 @@ def index():
 @app.route('/reg/osc', methods=['GET', 'POST'])
 def reg_osc():
     if request.method == 'POST':
-        card_id = request.form['card_id']
-        password = request.form['password']
+        data = request.get_json()
+        card_id = data['card_id']
+        password = data['password']
         user = User.objects(card_id=card_id).first()
         result = validate(card_id, password)
-        phone = request.form['phone']
-        email = request.form['email']
+        phone = data['phone']
+        email = data['email']
         club = Club.objects(name='开源社区').first()
         if result['success']:
             if user is None:
