@@ -100,7 +100,7 @@ def reg_osc():
                 Member(club=club, member=user).save()
         else:
             abort(401)
-        return jsonify(status='ok', name=user.name)
+        return jsonify(name=user.name)
     else:
         return render_template('reg.html')
 
