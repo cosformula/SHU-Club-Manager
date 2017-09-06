@@ -7,7 +7,7 @@ import json
 import os.path as op
 import random
 
-from flask import abort,Flask,jsonify,redirect,render_template,request
+from flask import abort, Flask, jsonify, redirect, render_template, request, url_for
 from flask_admin import Admin
 
 from flask_babelex import Babel
@@ -77,46 +77,44 @@ def validate(card_id, password):
 def index():
     return redirect('/admin')
 
-@app.route('/reg/osc',methods=['GET','POST'])
+
+@app.route('/reg/osc', methods=['GET', 'POST'])
 def reg_osc():
     if request.method == 'POST':
         card_id = request.form['card_id']
         password = request.form['password']
         user = User.objects(card_id=card_id).first()
-        result = validate(card_id,password)
+        result = validate(card_id, password)
         phone = request.form['phone']
         email = request.form['email']
         club = Club.objects(name='开源社区').first()
         if result['success']:
             if user is None:
                 user = User(name=result['name'],
-                        card_id=card_id,role='student',phone=phone,email=email)
+                            card_id=card_id, role='student', phone=phone, email=email)
                 user.save()
             if club not in user.clubs:
                 user.clubs.append(club)
                 user.save()
-                Mebmer(club=club,member=user).save()
+                Member(club=club, member=user).save()
         else:
             abort(401)
         return jsonify(status='ok')
     else:
         return render_template('reg.html')
 
-                
 
 @app.route('/login', methods=['GET', 'POST'])
 def login_view():
     if request.method == 'POST':
         card_id = request.form['card_id']
         password = request.form['password']
-        #phone = request.form['phone']
-        #email = request.form['email']
         user = User.objects(card_id=card_id).first()
         result = validate(card_id, password)
         if result['success']:
-            if user == None:
+            if user is None:
                 user = User(name=result['name'],
-                            card_id=card_id,role='student')
+                            card_id=card_id, role='student')
                 user.save()
             flask_login.login_user(user)
         else:
