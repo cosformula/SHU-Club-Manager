@@ -132,7 +132,7 @@
 			<form @submit.prevent="submit">
 				<label for="card_id">学&emsp;号</label><input id="card_id" name="card_id" v-model="student.card_id" type="number">
 				<label for="password">一卡通密码</label><input type="password" id="password" name="password" v-model="student.password">
-				<label for="tel">手机号码</label><input id="tel" name="tel" type="tel" v-model="student.tel">
+				<label for="phone">手机号码</label><input id="phone" name="phone" type="phone" v-model="student.phone">
 				<label for="email">邮箱</label><input id="email" name="email" type="email" v-model="student.email">
 				<div class="submit">
 					<button value="submit">提交</button>
@@ -162,7 +162,7 @@
 					student: {
 						card_id: '',
 						password: '',
-						tel: '',
+						phone: '',
 						email: ''
 					},
 					name: '',
